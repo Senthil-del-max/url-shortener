@@ -28,6 +28,12 @@ async function shortenUrl() {
 
         console.log(data);
 
+        // Fix localhost URLs automatically
+        let shortUrl = data.shortUrl.replace(
+            "http://localhost:8080",
+            window.location.origin
+        );
+
         document.getElementById("result").innerHTML = `
 
             <h2>Short URL</h2>
@@ -35,7 +41,7 @@ async function shortenUrl() {
             <input
                 type="text"
                 id="shortUrl"
-                value="${data.shortUrl}"
+                value="${shortUrl}"
                 readonly>
 
             <br><br>
@@ -46,7 +52,7 @@ async function shortenUrl() {
 
             <br><br>
 
-            <a href="${data.shortUrl}" target="_blank">
+            <a href="${shortUrl}" target="_blank">
                 Open Short URL
             </a>
 
