@@ -37,13 +37,12 @@ public class UrlController {
                 request.getCustomAlias()
         );
 
-        String shortUrl =
-                "http://localhost:8080/s/" + code;
+        // CHANGE THIS TO YOUR RENDER URL
+        String baseUrl = "https://url-shortener-2itn.onrender.com";
 
-        String qrCode =
-                QrCodeGenerator.generateQRCode(
-                        shortUrl
-                );
+        String shortUrl = baseUrl + "/s/" + code;
+
+        String qrCode = QrCodeGenerator.generateQRCode(shortUrl);
 
         return new UrlResponse(
                 shortUrl,
@@ -62,8 +61,7 @@ public class UrlController {
             return ResponseEntity.notFound().build();
         }
 
-        UrlMapping mapping =
-                optional.get();
+        UrlMapping mapping = optional.get();
 
         mapping.setClickCount(
                 mapping.getClickCount() + 1
